@@ -9,20 +9,23 @@ public class CloudEvent implements Serializable {
 
     private static final long serialVersionUID = 18763219239181838L;
 
-    private String eventType;
+    private final String eventType;
+    private final String cloudEventsVersion;
+    private final URI source;
+    private final String eventID;
     private String eventTypeVersion;
-    private String cloudEventsVersion;
-    private URI source;
-    private String eventID;
     private Date eventTime;
     private URI schemaURL;
 
-    public String getEventType() {
-        return eventType;
+    public CloudEvent(final String eventType, final String cloudEventsVersion, final URI source, final String eventID) {
+        this.eventType = eventType;
+        this.cloudEventsVersion = cloudEventsVersion;
+        this.source = source;
+        this.eventID = eventID;
     }
 
-    public void setEventType(String eventType) {
-        this.eventType = eventType;
+    public String getEventType() {
+        return eventType;
     }
 
     public String getEventTypeVersion() {
@@ -37,24 +40,12 @@ public class CloudEvent implements Serializable {
         return cloudEventsVersion;
     }
 
-    public void setCloudEventsVersion(String cloudEventsVersion) {
-        this.cloudEventsVersion = cloudEventsVersion;
-    }
-
     public URI getSource() {
         return source;
     }
 
-    public void setSource(URI source) {
-        this.source = source;
-    }
-
     public String getEventID() {
         return eventID;
-    }
-
-    public void setEventID(String eventID) {
-        this.eventID = eventID;
     }
 
     public Date getEventTime() {

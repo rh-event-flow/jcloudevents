@@ -25,7 +25,7 @@ public class CloudEventTest extends AbstractTestBase {
     }
 
     @Test
-    public void testDispatch(final Receiver receiver) {
+    public void testDispatch(final Receiver receiver) throws Exception {
         router.routeMe();
         Mockito.verify(receiver, Mockito.times(1)).ack();
     }
