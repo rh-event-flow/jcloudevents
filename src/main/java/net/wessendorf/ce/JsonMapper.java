@@ -17,7 +17,7 @@ public final class JsonMapper {
             return MAPPER.readValue(inputStream, CloudEvent.class);
         } catch (IOException e) {
             LOGGER.severe(e.getMessage());
+            throw new IllegalStateException("input was not parseable", e);
         }
-        return null;
     }
 }
