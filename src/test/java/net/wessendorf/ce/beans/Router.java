@@ -1,14 +1,13 @@
 package net.wessendorf.ce.beans;
 
 import net.wessendorf.ce.CloudEvent;
+import net.wessendorf.ce.CloudEventBuilder;
 
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
 
 import java.net.URI;
 import java.util.UUID;
-
-import static net.wessendorf.ce.CloudEventVersion.ZERO_ONE;
 
 public class Router {
 
@@ -17,10 +16,12 @@ public class Router {
 
     public void routeMe() throws Exception {
 
-        final CloudEvent<MyCustomEvent> event = new CloudEvent(
-                "Cloud.Storage.Item.Created",
-                ZERO_ONE.toString(), new URI("/trigger"),
-                UUID.randomUUID().toString());
+
+        CloudEvent<MyCustomEvent> event = new CloudEventBuilder<MyCustomEvent>()
+                .eventType("Cloud.Storage.Item.Created")
+                .source(new URI("/trigger"))
+                .eventID(UUID.randomUUID().toString())
+                .build();
 
         cloudEvent.fire(event);
     }
