@@ -1,21 +1,19 @@
-package net.wessendorf.ce.beans;
+= Implementation of the CloudEvents Specification 
 
-import net.wessendorf.ce.CloudEvent;
-import net.wessendorf.ce.CloudEventBuilder;
+Simple CDI libray for the link:https://github.com/cloudevents/spec[CloudEvents Specification]
 
-import javax.enterprise.event.Event;
-import javax.inject.Inject;
+== Creating and firing an event:
 
-import java.net.URI;
-import java.util.UUID;
-
-public class Router {
+[source,java]
+----
+public class EventRouter {
 
     @Inject
     private Event<CloudEvent<MyCustomEvent>> cloudEvent;
 
-    public void routeMe() throws Exception {
+    public void doAndTrigger() throws Exception {
 
+        // do some domain specific stuff...
 
         CloudEvent<MyCustomEvent> event = new CloudEventBuilder<MyCustomEvent>()
                 .eventType("Cloud.Storage.Item.Created")
@@ -26,3 +24,5 @@ public class Router {
         cloudEvent.fire(event);
     }
 }
+----
+

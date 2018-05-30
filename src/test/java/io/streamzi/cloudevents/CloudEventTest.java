@@ -1,7 +1,7 @@
-package net.wessendorf.ce;
+package io.streamzi.cloudevents;
 
-import net.wessendorf.ce.beans.Receiver;
-import net.wessendorf.ce.beans.Router;
+import io.streamzi.cloudevents.beans.Receiver;
+import io.streamzi.cloudevents.beans.Router;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;

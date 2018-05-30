@@ -1,6 +1,6 @@
-package net.wessendorf.ce;
+package io.streamzi.cloudevents;
 
-import net.wessendorf.ce.impl.CloudEventImpl;
+import io.streamzi.cloudevents.impl.CloudEventImpl;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;

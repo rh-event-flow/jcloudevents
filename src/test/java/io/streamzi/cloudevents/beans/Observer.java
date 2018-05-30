@@ -1,6 +1,6 @@
-package net.wessendorf.ce.beans;
+package io.streamzi.cloudevents.beans;
 
-import net.wessendorf.ce.impl.CloudEventImpl;
+import io.streamzi.cloudevents.impl.CloudEventImpl;
 
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;

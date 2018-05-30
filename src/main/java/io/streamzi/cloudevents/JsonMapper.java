@@ -1,7 +1,7 @@
-package net.wessendorf.ce;
+package io.streamzi.cloudevents;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import net.wessendorf.ce.impl.CloudEventImpl;
+import io.streamzi.cloudevents.impl.CloudEventImpl;
 
 import java.io.IOException;
 import java.io.InputStream;

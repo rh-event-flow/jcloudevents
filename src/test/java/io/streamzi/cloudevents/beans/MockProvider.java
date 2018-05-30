@@ -1,4 +1,4 @@
-package net.wessendorf.ce.beans;
+package io.streamzi.cloudevents.beans;
 import org.mockito.Mockito;
 
 import javax.enterprise.context.ApplicationScoped;

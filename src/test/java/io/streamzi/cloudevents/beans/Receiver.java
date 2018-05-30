@@ -1,4 +1,4 @@
-package net.wessendorf.ce.beans;
+package io.streamzi.cloudevents.beans;
 
 public interface Receiver {
 

@@ -1,6 +1,6 @@
-package net.wessendorf.ce.impl;
+package io.streamzi.cloudevents.impl;
 
-import net.wessendorf.ce.CloudEvent;
+import io.streamzi.cloudevents.CloudEvent;
 
 import java.io.Serializable;
 import java.net.URI;
