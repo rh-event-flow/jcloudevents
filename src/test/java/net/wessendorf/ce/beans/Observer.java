@@ -1,6 +1,6 @@
 package net.wessendorf.ce.beans;
 
-import net.wessendorf.ce.CloudEvent;
+import net.wessendorf.ce.impl.CloudEventImpl;
 
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
@@ -11,7 +11,7 @@ public class Observer {
     private Receiver receiver;
 
 
-    public void receiveCloudEvent(@Observes CloudEvent cloudEvent) {
+    public void receiveCloudEvent(@Observes CloudEventImpl cloudEvent) {
 
         receiver.ack();
 

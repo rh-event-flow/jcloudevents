@@ -1,114 +1,63 @@
 package net.wessendorf.ce;
 
-import java.io.Serializable;
+
 import java.net.URI;
 import java.util.Date;
 import java.util.Map;
 
-public class CloudEvent<T> implements Serializable {
+/**
+ * An abstract event envelope, representing the 0.1 version of the <a href="https://github.com/cloudevents/spec/blob/master/spec.md">CNCF CloudEvent spec</a>.
+ *
+ */
+public interface CloudEvent<T> {
+    /**
+     * Type of occurrence which has happened. Often this property is used for routing, observability, policy enforcement, etc.
+     */
+    String getEventType();
 
-    private static final long serialVersionUID = 18763219239181838L;
+    /**
+     * The version of the eventType. This enables the interpretation of data by eventual consumers, requires the consumer to be knowledgeable about the producer.
+     */
+    String getEventTypeVersion();
 
-    private String eventType;
-    private String cloudEventsVersion;
-    private URI source;
-    private String eventID;
-    private String eventTypeVersion;
-    private Date eventTime;
-    private URI schemaURL;
-    private String contentType;
-    private Map extensions;
-    private T data;
+    /**
+     * The version of the CloudEvents specification which the event uses. This enables the interpretation of the context.
+     */
+    String getCloudEventsVersion();
 
-    CloudEvent() {
+    /**
+     * This describes the event producer. Often this will include information such as the type of the event source, the organization publishing the event, and some unique identifiers.
+     * The exact syntax and semantics behind the data encoded in the URI is event producer defined.
+     */
+    URI getSource();
 
-    }
+    /**
+     * ID of the event. The semantics of this string are explicitly undefined to ease the implementation of producers. Enables deduplication.
+     */
+    String getEventID();
 
-    public CloudEvent(final String eventType, final String cloudEventsVersion, final URI source, final String eventID) {
-        this(eventType, cloudEventsVersion, source, eventID, null);
-    }
+    /**
+     * Timestamp of when the event happened.
+     */
+    Date getEventTime();
 
-    public CloudEvent(final String eventType, final String cloudEventsVersion, final URI source, final String eventID, final T data) {
-        this.eventType = eventType;
-        this.cloudEventsVersion = cloudEventsVersion;
-        this.source = source;
-        this.eventID = eventID;
-        this.data = data;
-    }
+    /**
+     * A link to the schema that the data attribute adheres to.
+     */
+    URI getSchemaURL();
 
-    public String getEventType() {
-        return eventType;
-    }
+    /**
+     * Describe the data encoding format
+     */
+    String getContentType();
 
-    public void setEventType(String eventType) {
-        this.eventType = eventType;
-    }
+    /**
+     * This is for additional metadata and this does not have a mandated structure. This enables a place for custom fields a producer or middleware might want to include and provides a place to test metadata before adding them to the CloudEvents specification.
+     */
+    Map getExtensions();
 
-    public String getCloudEventsVersion() {
-        return cloudEventsVersion;
-    }
-
-    public void setCloudEventsVersion(String cloudEventsVersion) {
-        this.cloudEventsVersion = cloudEventsVersion;
-    }
-
-    public URI getSource() {
-        return source;
-    }
-
-    public void setSource(URI source) {
-        this.source = source;
-    }
-
-    public String getEventID() {
-        return eventID;
-    }
-
-    public void setEventID(String eventID) {
-        this.eventID = eventID;
-    }
-
-    public String getEventTypeVersion() {
-        return eventTypeVersion;
-    }
-
-    public void setEventTypeVersion(String eventTypeVersion) {
-        this.eventTypeVersion = eventTypeVersion;
-    }
-
-    public Date getEventTime() {
-        return eventTime;
-    }
-
-    public void setEventTime(Date eventTime) {
-        this.eventTime = eventTime;
-    }
-
-    public URI getSchemaURL() {
-        return schemaURL;
-    }
-
-    public void setSchemaURL(URI schemaURL) {
-        this.schemaURL = schemaURL;
-    }
-
-    public String getContentType() {
-        return contentType;
-    }
-
-    public void setContentType(String contentType) {
-        this.contentType = contentType;
-    }
-
-    public Map getExtensions() {
-        return extensions;
-    }
-
-    public void setExtensions(Map extensions) {
-        this.extensions = extensions;
-    }
-
-    public T getData() {
-        return data;
-    }
+    /**
+     * The event payload. The payload depends on the eventType, schemaURL and eventTypeVersion, the payload is encoded into a media format which is specified by the contentType attribute (e.g. application/json).
+     */
+    T getData();
 }
