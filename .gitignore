@@ -1,6 +1,27 @@
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+#Build targets
+target/
+/target
+*/target
+
+#Maven release files
+*.releaseBackup
+release.properties
+
+.vscode/
+.idea/
+*.class
+*.iml
 .classpath
 .project
 .settings/
-target/
 
+.DS_Store
+*.checkstyle
 
