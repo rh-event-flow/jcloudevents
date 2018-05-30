@@ -13,11 +13,11 @@ import static net.wessendorf.ce.CloudEventVersion.ZERO_ONE;
 public class Router {
 
     @Inject
-    private Event<CloudEvent> cloudEvent;
+    private Event<CloudEvent<MyCustomEvent>> cloudEvent;
 
     public void routeMe() throws Exception {
 
-        final CloudEvent event = new CloudEvent(
+        final CloudEvent<MyCustomEvent> event = new CloudEvent(
                 "Cloud.Storage.Item.Created",
                 ZERO_ONE.toString(), new URI("/trigger"),
                 UUID.randomUUID().toString());
