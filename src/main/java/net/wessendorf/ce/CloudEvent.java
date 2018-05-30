@@ -5,7 +5,7 @@ import java.net.URI;
 import java.util.Date;
 import java.util.Map;
 
-public class CloudEvent implements Serializable {
+public class CloudEvent<T> implements Serializable {
 
     private static final long serialVersionUID = 18763219239181838L;
 
@@ -18,17 +18,22 @@ public class CloudEvent implements Serializable {
     private URI schemaURL;
     private String contentType;
     private Map extensions;
-    private Map data;
+    private T data;
 
-    public CloudEvent() {
+    CloudEvent() {
 
     }
 
     public CloudEvent(final String eventType, final String cloudEventsVersion, final URI source, final String eventID) {
+        this(eventType, cloudEventsVersion, source, eventID, null);
+    }
+
+    public CloudEvent(final String eventType, final String cloudEventsVersion, final URI source, final String eventID, final T data) {
         this.eventType = eventType;
         this.cloudEventsVersion = cloudEventsVersion;
         this.source = source;
         this.eventID = eventID;
+        this.data = data;
     }
 
     public String getEventType() {
@@ -103,11 +108,7 @@ public class CloudEvent implements Serializable {
         this.extensions = extensions;
     }
 
-    public Map getData() {
+    public T getData() {
         return data;
-    }
-
-    public void setData(Map data) {
-        this.data = data;
     }
 }
