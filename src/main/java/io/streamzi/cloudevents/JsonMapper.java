@@ -5,6 +5,7 @@ import io.streamzi.cloudevents.impl.CloudEventImpl;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.ZonedDateTime;
 import java.util.logging.Logger;
 
 public final class JsonMapper {
@@ -20,5 +21,9 @@ public final class JsonMapper {
             LOGGER.severe(e.getMessage());
             throw new IllegalStateException("input was not parseable", e);
         }
+    }
+
+    public static void main(String[] args) {
+        System.out.println(ZonedDateTime.parse("2018-04-23T12:28:22.4579346Z"));
     }
 }

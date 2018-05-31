@@ -3,6 +3,7 @@ package io.streamzi.cloudevents;
 import io.streamzi.cloudevents.impl.CloudEventImpl;
 
 import java.net.URI;
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.Map;
 
@@ -13,7 +14,7 @@ public class CloudEventBuilder<T> {
     private URI source;
     private String eventID;
     private String eventTypeVersion;
-    private Date eventTime;
+    private ZonedDateTime eventTime = ZonedDateTime.now();
     private URI schemaURL;
     private String contentType;
     private Map extensions;
@@ -44,7 +45,7 @@ public class CloudEventBuilder<T> {
         return this;
     }
 
-    public CloudEventBuilder<T> eventTime(final Date eventTime) {
+    public CloudEventBuilder<T> eventTime(final ZonedDateTime eventTime) {
         this.eventTime = eventTime;
         return this;
     }
