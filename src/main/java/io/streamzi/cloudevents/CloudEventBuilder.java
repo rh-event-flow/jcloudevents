@@ -1,6 +1,6 @@
-package net.wessendorf.ce;
+package io.streamzi.cloudevents;
 
-import net.wessendorf.ce.impl.CloudEventImpl;
+import io.streamzi.cloudevents.impl.CloudEventImpl;
 
 import java.net.URI;
 import java.util.Date;

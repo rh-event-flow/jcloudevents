@@ -1,4 +1,4 @@
-package net.wessendorf.ce;
+package io.streamzi.cloudevents;
 
 
 import java.net.URI;

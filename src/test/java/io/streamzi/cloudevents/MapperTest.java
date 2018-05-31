@@ -1,6 +1,6 @@
-package net.wessendorf.ce;
+package io.streamzi.cloudevents;
 
-import net.wessendorf.ce.impl.CloudEventImpl;
+import io.streamzi.cloudevents.impl.CloudEventImpl;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
