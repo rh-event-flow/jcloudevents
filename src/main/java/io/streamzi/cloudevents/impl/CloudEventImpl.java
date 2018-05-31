@@ -1,11 +1,14 @@
 package io.streamzi.cloudevents.impl;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.streamzi.cloudevents.CloudEvent;
 
 import java.io.Serializable;
 import java.net.URI;
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.Map;
+import java.util.Optional;
 
 public class CloudEventImpl<T> implements CloudEvent<T>, Serializable {
 
@@ -16,13 +19,15 @@ public class CloudEventImpl<T> implements CloudEvent<T>, Serializable {
     private URI source;
     private String eventID;
     private String eventTypeVersion;
-    private Date eventTime;
+
+    @JsonDeserialize(using = ZonedDateTimeDeserializer.class)
+    private ZonedDateTime eventTime;
     private URI schemaURL;
     private String contentType;
     private Map extensions;
     private T data;
 
-    public CloudEventImpl(final String eventType, final String cloudEventsVersion, final URI source, final String eventID, final String eventTypeVersion, final Date eventTime, final URI schemaURL, final String contentType, final Map extensions, final T data) {
+    public CloudEventImpl(final String eventType, final String cloudEventsVersion, final URI source, final String eventID, final String eventTypeVersion, final ZonedDateTime eventTime, final URI schemaURL, final String contentType, final Map extensions, final T data) {
         this.eventType = eventType;
         this.cloudEventsVersion = cloudEventsVersion;
         this.source = source;
@@ -59,32 +64,32 @@ public class CloudEventImpl<T> implements CloudEvent<T>, Serializable {
     }
 
     @Override
-    public String getEventTypeVersion() {
-        return eventTypeVersion;
+    public Optional<String> getEventTypeVersion() {
+        return Optional.of(eventTypeVersion);
     }
 
     @Override
-    public Date getEventTime() {
-        return eventTime;
+    public Optional<ZonedDateTime> getEventTime() {
+        return Optional.of(eventTime);
     }
 
     @Override
-    public URI getSchemaURL() {
-        return schemaURL;
+    public Optional<URI> getSchemaURL() {
+        return Optional.of(schemaURL);
     }
 
     @Override
-    public String getContentType() {
-        return contentType;
+    public Optional<String> getContentType() {
+        return Optional.of(contentType);
     }
 
     @Override
-    public Map getExtensions() {
-        return extensions;
+    public Optional<Map> getExtensions() {
+        return Optional.of(extensions);
     }
 
     @Override
-    public T getData() {
-        return data;
+    public Optional<T> getData() {
+        return Optional.of(data);
     }
 }
