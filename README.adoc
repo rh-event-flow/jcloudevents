@@ -6,7 +6,7 @@ Simple CDI libray for the link:https://github.com/cloudevents/spec[CloudEvents S
 
 [source,java]
 ----
-public class EventRouter {
+public class EventPublisher {
 
     @Inject
     private Event<CloudEvent<MyCustomEvent>> cloudEvent;
@@ -21,8 +21,21 @@ public class EventRouter {
                 .eventID(UUID.randomUUID().toString())
                 .build();
 
-        cloudEvent.fire(event);
+        cloudEvent.select(
+                    new EventTypeQualifier("Cloud.Storage.Item.Created"))
+                .fire(event);
+
     }
 }
 ----
 
+== Receiving the event
+
+[source,java]
+----
+...
+    public void receiveCloudEvent(@Observes @EventType(name = "Cloud.Storage.Item.Created") CloudEvent cloudEvent) {
+
+        receiver.ack();
+    }
+----
