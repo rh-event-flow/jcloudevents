@@ -2,6 +2,7 @@ package io.streamzi.cloudevents.beans;
 
 import io.streamzi.cloudevents.CloudEvent;
 import io.streamzi.cloudevents.CloudEventBuilder;
+import io.streamzi.cloudevents.EventTypeQualifier;
 
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
@@ -16,13 +17,14 @@ public class Router {
 
     public void routeMe() throws Exception {
 
-
         CloudEvent<MyCustomEvent> event = new CloudEventBuilder<MyCustomEvent>()
                 .eventType("Cloud.Storage.Item.Created")
                 .source(new URI("/trigger"))
                 .eventID(UUID.randomUUID().toString())
                 .build();
 
-        cloudEvent.fire(event);
+        cloudEvent.select(
+                    new EventTypeQualifier("Cloud.Storage.Item.Created"))
+                .fire(event);
     }
 }
