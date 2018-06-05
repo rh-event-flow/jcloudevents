@@ -23,15 +23,15 @@
         <version>25</version>
     </parent>
 
-    <groupId>net.wessendorf.ce</groupId>
+    <groupId>io.streamzi</groupId>
     <artifactId>jcloudevents</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <scm>
-        <connection>scm:git:git://github.com/matzew/jcloudevents.git</connection>
-        <developerConnection>scm:git:git@github.com:matzew/jcloudevents.git</developerConnection>
-        <url>https://github.com/matzew/jcloudevents</url>
+        <connection>scm:git:git://github.com/project-streamzi/jcloudevents.git</connection>
+        <developerConnection>scm:git:git@github.com:project-streamzi/jcloudevents.git</developerConnection>
+        <url>https://github.com/project-streamzi/jcloudevents</url>
         <tag>HEAD</tag>
     </scm>
 
