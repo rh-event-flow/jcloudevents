@@ -2,7 +2,34 @@
 
 Simple CDI libray for the link:https://github.com/cloudevents/spec[CloudEvents Specification]
 
-== Creating and firing an event:
+== JAX-RS support
+
+Adding the libary to your JAX-RS based application integrates its `/ce` endpoint for handling CloudEvents.
+
+Receiving different multi-cloud events, using the CDI API:
+
+[source,java]
+----
+public class Monitor {
+
+    public void receiveCloudEventFromAWS(@Observes @EventType(name = "aws.s3.object.created") CloudEvent<?> cloudEvent) {
+
+        System.out.println("S3 event: " + cloudEvent);
+
+    }
+    public void receiveCloudEventFromAzure(@Observes @EventType(name = "Microsoft.Storage.BlobCreated") CloudEvent<?> cloudEvent) {
+
+        System.out.println("Azure event: " + cloudEvent);
+
+    }
+}
+----
+
+== Java SE / Weld-SE support
+
+Vanilla CDI support and APIs for CloudEvents
+
+=== Creating and firing an event:
 
 [source,java]
 ----
@@ -29,7 +56,7 @@ public class EventPublisher {
 }
 ----
 
-== Receiving the event
+=== Receiving the event
 
 [source,java]
 ----

@@ -65,31 +65,31 @@ public class CloudEventImpl<T> implements CloudEvent<T>, Serializable {
 
     @Override
     public Optional<String> getEventTypeVersion() {
-        return Optional.of(eventTypeVersion);
+        return Optional.ofNullable(eventTypeVersion);
     }
 
     @Override
     public Optional<ZonedDateTime> getEventTime() {
-        return Optional.of(eventTime);
+        return Optional.ofNullable(eventTime);
     }
 
     @Override
     public Optional<URI> getSchemaURL() {
-        return Optional.of(schemaURL);
+        return Optional.ofNullable(schemaURL);
     }
 
     @Override
     public Optional<String> getContentType() {
-        return Optional.of(contentType);
+        return Optional.ofNullable(contentType);
     }
 
     @Override
     public Optional<Map> getExtensions() {
-        return Optional.of(extensions);
+        return Optional.ofNullable(extensions);
     }
 
     @Override
     public Optional<T> getData() {
-        return Optional.of(data);
+        return Optional.ofNullable(data);
     }
 }
