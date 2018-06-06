@@ -2,6 +2,11 @@
 
 Simple CDI libray for the link:https://github.com/cloudevents/spec[CloudEvents Specification]
 
+
+A more detailed introduction is link:./introduction.md[here]
+
+Below is a simple overview!
+
 == JAX-RS support
 
 Adding the libary to your JAX-RS based application integrates its `/ce` endpoint for handling CloudEvents.
