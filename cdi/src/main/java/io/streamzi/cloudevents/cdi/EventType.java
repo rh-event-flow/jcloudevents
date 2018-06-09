@@ -1,4 +1,4 @@
-package io.streamzi.cloudevents;
+package io.streamzi.cloudevents.cdi;
 
 import javax.inject.Qualifier;
 import java.lang.annotation.ElementType;

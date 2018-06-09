@@ -1,7 +1,7 @@
 package io.streamzi.cloudevents.jaxrs;
 
 import io.streamzi.cloudevents.CloudEvent;
-import io.streamzi.cloudevents.EventTypeQualifier;
+import io.streamzi.cloudevents.cdi.EventTypeQualifier;
 import io.streamzi.cloudevents.impl.CloudEventImpl;
 
 

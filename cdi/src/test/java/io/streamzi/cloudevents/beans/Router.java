@@ -2,7 +2,7 @@ package io.streamzi.cloudevents.beans;
 
 import io.streamzi.cloudevents.CloudEvent;
 import io.streamzi.cloudevents.CloudEventBuilder;
-import io.streamzi.cloudevents.EventTypeQualifier;
+import io.streamzi.cloudevents.cdi.EventTypeQualifier;
 
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
@@ -24,7 +24,7 @@ public class Router {
                 .build();
 
         cloudEvent.select(
-                    new EventTypeQualifier("Cloud.Storage.Item.Created"))
+                new EventTypeQualifier("Cloud.Storage.Item.Created"))
                 .fire(event);
     }
 }

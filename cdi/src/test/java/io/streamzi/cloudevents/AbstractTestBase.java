@@ -1,5 +1,6 @@
 package io.streamzi.cloudevents;
 
+import io.streamzi.cloudevents.beans.Router;
 import io.streamzi.cloudevents.impl.CloudEventImpl;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
@@ -11,6 +12,7 @@ public abstract class AbstractTestBase {
 
         return ShrinkWrap.create(JavaArchive.class)
                 .addPackage(CloudEventImpl.class.getPackage())
+                .addPackage(MockProvider.class.getPackage())
                 .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
     }
 }
