@@ -12,6 +12,7 @@ public class MapperTest {
     public void testAzureJSON() {
         CloudEventImpl ce = JsonMapper.fromInputStream(Thread.currentThread().getContextClassLoader().getResourceAsStream("azure.json"));
         assertThat(ce.getEventType()).isEqualTo("Microsoft.Storage.BlobCreated");
+        assertThat(ce.getData()).isNotNull();
     }
 
     @Test

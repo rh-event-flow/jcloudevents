@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.net.URI;
 import java.time.ZonedDateTime;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -24,7 +25,7 @@ public class CloudEventImpl<T> implements CloudEvent<T>, Serializable {
     private ZonedDateTime eventTime;
     private URI schemaURL;
     private String contentType;
-    private Map extensions;
+    private Map extensions = new HashMap();
     private T data;
 
     public CloudEventImpl(final String eventType, final String cloudEventsVersion, final URI source, final String eventID, final String eventTypeVersion, final ZonedDateTime eventTime, final URI schemaURL, final String contentType, final Map extensions, final T data) {
