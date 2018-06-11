@@ -55,6 +55,7 @@
         <module>api</module>
         <module>cdi</module>
         <module>jax-rs</module>
+        <module>kafka</module>
     </modules>
 
 </project>
