@@ -1,4 +1,6 @@
-package io.streamzi.cloudevents.beans;
+package io.streamzi.cloudevents;
+
+import io.streamzi.cloudevents.beans.Receiver;
 import org.mockito.Mockito;
 
 import javax.enterprise.context.ApplicationScoped;
