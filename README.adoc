@@ -7,9 +7,9 @@ A more detailed introduction is link:./introduction.md[here]
 
 Below is a simple overview!
 
-== JAX-RS support
+== JAX-RS and Apache Kafka support
 
-Adding the libary to your JAX-RS based application integrates its `/ce` endpoint for handling CloudEvents.
+Adding the `jax-rs` or `kafka` module to your application integrates, either the `/ce` JAX-RS endpoint, or a configurable Kafka consumer for handling CloudEvents from within your application!
 
 Receiving different multi-cloud events, using the CDI API:
 
