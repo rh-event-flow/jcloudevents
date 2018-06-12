@@ -1,6 +1,9 @@
 package io.streamzi.cloudevents;
 
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.streamzi.cloudevents.impl.CloudEventImpl;
+
 import java.net.URI;
 import java.time.ZonedDateTime;
 import java.util.Map;
@@ -10,6 +13,7 @@ import java.util.Optional;
  * An abstract event envelope, representing the 0.1 version of the <a href="https://github.com/cloudevents/spec/blob/master/spec.md">CNCF CloudEvent spec</a>.
  *
  */
+@JsonDeserialize(as = CloudEventImpl.class)
 public interface CloudEvent<T> {
     /**
      * Type of occurrence which has happened. Often this property is used for routing, observability, policy enforcement, etc.
