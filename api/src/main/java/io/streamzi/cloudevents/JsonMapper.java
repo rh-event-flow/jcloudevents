@@ -13,7 +13,7 @@ public final class JsonMapper {
     private static final ObjectMapper MAPPER = new ObjectMapper();
     private static final Logger LOGGER = Logger.getLogger(JsonMapper.class.getName());
 
-    {
+    static {
         MAPPER.registerModule(new Jdk8Module());
     }
 
