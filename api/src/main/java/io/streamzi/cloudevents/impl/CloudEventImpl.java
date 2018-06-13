@@ -1,5 +1,6 @@
 package io.streamzi.cloudevents.impl;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.streamzi.cloudevents.CloudEvent;
 
@@ -13,32 +14,38 @@ import java.util.Optional;
 
 public class CloudEventImpl<T> implements CloudEvent<T>, Serializable {
 
-    private static final long serialVersionUID = 1;
+    public static final String EVENT_TYPE_KEY = "eventType";
+    public static final String CLOUD_EVENTS_VERSION_KEY = "cloudEventsVersion";
+    public static final String SOURCE_KEY = "source";
+    public static final String EVENT_ID_KEY = "eventID";
+    public static final String EVENT_TYPE_VERSION_KEY = "eventTypeVersion";
+    public static final String EVENT_TIME_KEY = "eventTime";
+    public static final String SCHEMA_URL_KEY = "schemaURL";
+    public static final String CONTENT_TYPE_KEY = "contentType";
+    public static final String EXTENSIONS_KEY = "extensions";
+    public static final String DATA_KEY = "data";
 
-    private String eventType;
-    private String cloudEventsVersion;
-    private URI source;
-    private String eventID;
-    private String eventTypeVersion;
+    private static final long serialVersionUID = 2L;
 
-    @JsonDeserialize(using = ZonedDateTimeDeserializer.class)
-    private ZonedDateTime eventTime;
-    private URI schemaURL;
-    private String contentType;
-    private Map extensions = new HashMap();
-    private T data;
+    @JsonIgnore
+    public Map<String, ? super Object> getAttributes() {
+        return attributes;
+    }
+
+    private final Map<String, ? super Object> attributes = new HashMap();
 
     public CloudEventImpl(final String eventType, final String cloudEventsVersion, final URI source, final String eventID, final String eventTypeVersion, final ZonedDateTime eventTime, final URI schemaURL, final String contentType, final Map extensions, final T data) {
-        this.eventType = eventType;
-        this.cloudEventsVersion = cloudEventsVersion;
-        this.source = source;
-        this.eventID = eventID;
-        this.eventTypeVersion = eventTypeVersion;
-        this.eventTime = eventTime;
-        this.schemaURL = schemaURL;
-        this.contentType = contentType;
-        this.extensions = extensions;
-        this.data = data;
+        attributes.put(EVENT_TYPE_KEY, eventType);
+        attributes.put(CLOUD_EVENTS_VERSION_KEY, cloudEventsVersion);
+        attributes.put(SOURCE_KEY, source);
+        attributes.put(EVENT_ID_KEY, eventID);
+        attributes.put(EVENT_TYPE_VERSION_KEY, eventTypeVersion);
+        attributes.put(EVENT_TIME_KEY, eventTime);
+        attributes.put(SCHEMA_URL_KEY, schemaURL);
+        attributes.put(EXTENSIONS_KEY, extensions);
+        attributes.put(CONTENT_TYPE_KEY, contentType);
+        attributes.put(DATA_KEY, data);
+
     }
     CloudEventImpl() {
 
@@ -46,51 +53,100 @@ public class CloudEventImpl<T> implements CloudEvent<T>, Serializable {
 
     @Override
     public String getEventType() {
-        return eventType;
+        return (String) attributes.get(EVENT_TYPE_KEY);
     }
 
     @Override
     public String getCloudEventsVersion() {
-        return cloudEventsVersion;
+        return (String) attributes.get(CLOUD_EVENTS_VERSION_KEY);
     }
 
     @Override
     public URI getSource() {
-        return source;
+        return (URI) attributes.get(SOURCE_KEY);
     }
 
     @Override
     public String getEventID() {
-        return eventID;
+        return (String) attributes.get(EVENT_ID_KEY);
     }
 
     @Override
     public Optional<String> getEventTypeVersion() {
-        return Optional.ofNullable(eventTypeVersion);
+        return Optional.ofNullable((String) attributes.get(EVENT_TYPE_KEY));
     }
 
     @Override
     public Optional<ZonedDateTime> getEventTime() {
-        return Optional.ofNullable(eventTime);
+        return Optional.ofNullable((ZonedDateTime) attributes.get(EVENT_TIME_KEY));
     }
 
     @Override
     public Optional<URI> getSchemaURL() {
-        return Optional.ofNullable(schemaURL);
+        return Optional.ofNullable((URI) attributes.get(SCHEMA_URL_KEY));
     }
 
     @Override
     public Optional<String> getContentType() {
-        return Optional.ofNullable(contentType);
+        return Optional.ofNullable((String) attributes.get(CONTENT_TYPE_KEY));
     }
 
     @Override
     public Optional<Map> getExtensions() {
-        return Optional.ofNullable(extensions);
+        return Optional.ofNullable((Map) attributes.get(EXTENSIONS_KEY));
     }
 
     @Override
     public Optional<T> getData() {
-        return Optional.ofNullable(data);
+        return Optional.ofNullable((T) attributes.get(DATA_KEY));
     }
+
+
+    // protected setters for key/value pairs in the Map,
+    // used for JSON deserialization
+
+    void setEventType(String eventType) {
+        attributes.put(EVENT_TYPE_KEY, eventType);
+    }
+
+    void setCloudEventsVersion(String cloudEventsVersion) {
+        attributes.put(CLOUD_EVENTS_VERSION_KEY, cloudEventsVersion);
+    }
+
+    void setSource(URI source) {
+        attributes.put(SOURCE_KEY, source);
+    }
+
+    void setEventID(String eventID) {
+        attributes.put(EVENT_ID_KEY, eventID);
+    }
+
+    void setEventTypeVersion(String eventTypeVersion) {
+        attributes.put(EVENT_TYPE_VERSION_KEY, eventTypeVersion);
+    }
+
+    @JsonDeserialize(using = ZonedDateTimeDeserializer.class)
+    void setEventTime(ZonedDateTime eventTime) {
+        attributes.put(EVENT_TIME_KEY, eventTime);
+    }
+
+    void setSchemaURL(URI schemaURL) {
+        attributes.put(SCHEMA_URL_KEY, schemaURL);
+    }
+
+    void setContentType(String contentType) {
+        attributes.put(CONTENT_TYPE_KEY, contentType);
+    }
+
+    void setExtensions(Map extensions) {
+        attributes.put(EXTENSIONS_KEY, extensions);
+    }
+
+    public void setData(T data) {
+        attributes.put(DATA_KEY, data);
+    }
+
+
+
+
 }
