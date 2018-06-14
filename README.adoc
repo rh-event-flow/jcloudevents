@@ -1,7 +1,9 @@
 = Implementation of the CloudEvents Specification 
 
-Simple CDI libray for the link:https://github.com/cloudevents/spec[CloudEvents Specification]
+image:https://img.shields.io/travis/project-streamzi/jcloudevents/master.svg[Build Status (Travis CI), link=https://travis-ci.org/project-streamzi/jcloudevents]
+image:https://img.shields.io/:license-Apache2-blue.svg[License, link=http://www.apache.org/licenses/LICENSE-2.0]
 
+Simple CDI libray for the link:https://github.com/cloudevents/spec[CloudEvents Specification]
 
 A more detailed introduction is link:./introduction.md[here]
 
