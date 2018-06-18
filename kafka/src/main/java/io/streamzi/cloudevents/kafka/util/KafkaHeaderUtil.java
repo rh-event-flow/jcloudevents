@@ -41,13 +41,13 @@ public final class KafkaHeaderUtil {
 
         final RecordHeaders headers = new RecordHeaders();
 
-        headers.add(new RecordHeader(EVENT_TYPE_KEY, ((Serde) CafdiSerdes.serdeFrom(ce.getEventType().getClass())).serializer().serialize(null, ce.getEventType())));
-        headers.add(new RecordHeader(CLOUD_EVENTS_VERSION_KEY, ((Serde) CafdiSerdes.serdeFrom(ce.getCloudEventsVersion().getClass())).serializer().serialize(null, ce.getCloudEventsVersion())));
+        headers.add(new RecordHeader(EVENT_TYPE_KEY, ((Serde) CafdiSerdes.serdeFrom(String.class)).serializer().serialize(null, ce.getEventType())));
+        headers.add(new RecordHeader(CLOUD_EVENTS_VERSION_KEY, ((Serde) CafdiSerdes.serdeFrom(String.class)).serializer().serialize(null, ce.getCloudEventsVersion())));
         headers.add(new RecordHeader(SOURCE_KEY, ((Serde) CafdiSerdes.serdeFrom(String.class)).serializer().serialize(null, ce.getSource().toString())));
-        headers.add(new RecordHeader(EVENT_ID_KEY, ((Serde) CafdiSerdes.serdeFrom(ce.getEventID().getClass())).serializer().serialize(null, ce.getEventID())));
+        headers.add(new RecordHeader(EVENT_ID_KEY, ((Serde) CafdiSerdes.serdeFrom(String.class)).serializer().serialize(null, ce.getEventID())));
 
         if (ce.getEventTypeVersion().isPresent()) {
-            headers.add(new RecordHeader(EVENT_TYPE_VERSION_KEY,  ((Serde) CafdiSerdes.serdeFrom(ce.getEventTypeVersion().get().getClass())).serializer().serialize(null, ce.getEventTypeVersion().get()) ));
+            headers.add(new RecordHeader(EVENT_TYPE_VERSION_KEY,  ((Serde) CafdiSerdes.serdeFrom(String.class)).serializer().serialize(null, ce.getEventTypeVersion().get()) ));
         }
 
         if (ce.getSchemaURL().isPresent()) {
@@ -55,7 +55,7 @@ public final class KafkaHeaderUtil {
         }
 
         if (ce.getContentType().isPresent()) {
-            headers.add(new RecordHeader(CONTENT_TYPE_KEY, ((Serde) CafdiSerdes.serdeFrom(ce.getContentType().get().getClass())).serializer().serialize(null, ce.getContentType().get()) ));
+            headers.add(new RecordHeader(CONTENT_TYPE_KEY, ((Serde) CafdiSerdes.serdeFrom(String.class)).serializer().serialize(null, ce.getContentType().get()) ));
         }
 
         if (ce.getEventTime().isPresent()) {
