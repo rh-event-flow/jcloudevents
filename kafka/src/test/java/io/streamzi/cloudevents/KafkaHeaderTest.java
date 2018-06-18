@@ -8,6 +8,8 @@ import org.junit.Test;
 
 import java.net.URI;
 import java.time.ZonedDateTime;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import static io.streamzi.cloudevents.impl.CloudEventImpl.CLOUD_EVENTS_VERSION_KEY;
@@ -45,16 +47,23 @@ public class KafkaHeaderTest {
 
         final ConsumerRecord<String, String> record = new ConsumerRecord("topic", 0, 0, System.currentTimeMillis(), CREATE_TIME, 0L, 0, 0, "Key", "Value", requiredHeaders);
 
-        final CloudEvent cloudEvent = KafkaHeaderUtil.createFromConsumerRecord(record);
+        final CloudEvent<Map<String, String>> cloudEvent = KafkaHeaderUtil.createFromConsumerRecord(record);
 
         assertThat(cloudEvent.getData().get()).isNotNull();
-        assertThat(cloudEvent.getData().get()).isEqualTo(record);
+
+        // todo: use java9 Map.of
+        final Map<String, String> data = new HashMap();
+        {
+            data.put("Key", "Value");
+        }
+
+        assertThat(cloudEvent.getData().get()).isEqualTo(data);
+        assertThat(cloudEvent.getContentType().get()).isEqualTo("application/ce-kafka-data");
 
         assertThat(cloudEvent.getEventType()).isEqualTo("MY.CLOUD.CREATE");
         assertThat(cloudEvent.getCloudEventsVersion()).isEqualTo("0.1");
         assertThat(cloudEvent.getSource()).isEqualTo(URI.create("/senderTopic"));
         assertThat(cloudEvent.getEventID()).isNotNull();
 
-        assertThat(cloudEvent.getContentType().equals("application/ce-kafka-consumer-record"));
     }
 }
