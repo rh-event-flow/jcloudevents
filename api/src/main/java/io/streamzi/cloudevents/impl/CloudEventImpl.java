@@ -9,6 +9,7 @@ import java.net.URI;
 import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -42,7 +43,12 @@ public class CloudEventImpl<T> implements CloudEvent<T>, Serializable {
         attributes.put(EVENT_TYPE_VERSION_KEY, eventTypeVersion);
         attributes.put(EVENT_TIME_KEY, eventTime);
         attributes.put(SCHEMA_URL_KEY, schemaURL);
-        attributes.put(EXTENSIONS_KEY, extensions);
+
+        if (extensions != null) {
+            attributes.put(EXTENSIONS_KEY, extensions);
+        } else {
+            attributes.put(EXTENSIONS_KEY, new LinkedHashMap());
+        }
         attributes.put(CONTENT_TYPE_KEY, contentType);
         attributes.put(DATA_KEY, data);
 
@@ -73,7 +79,7 @@ public class CloudEventImpl<T> implements CloudEvent<T>, Serializable {
 
     @Override
     public Optional<String> getEventTypeVersion() {
-        return Optional.ofNullable((String) attributes.get(EVENT_TYPE_KEY));
+        return Optional.ofNullable((String) attributes.get(EVENT_TYPE_VERSION_KEY));
     }
 
     @Override
@@ -139,14 +145,20 @@ public class CloudEventImpl<T> implements CloudEvent<T>, Serializable {
     }
 
     void setExtensions(Map extensions) {
-        attributes.put(EXTENSIONS_KEY, extensions);
+        if (extensions != null) {
+            attributes.put(EXTENSIONS_KEY, extensions);
+        } else {
+            attributes.put(EXTENSIONS_KEY, new LinkedHashMap());
+        }
     }
 
     public void setData(T data) {
         attributes.put(DATA_KEY, data);
     }
 
-
-
-
+    @Override
+    public String toString() {
+        return "CloudEventImpl{" +
+                attributes + '}';
+    }
 }
