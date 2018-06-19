@@ -26,14 +26,14 @@
     <groupId>io.streamzi</groupId>
     <artifactId>jcloudevents-parent</artifactId>
     <name>jCloudEvents</name>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>0.0.2</version>
     <packaging>pom</packaging>
 
     <scm>
         <connection>scm:git:git://github.com/project-streamzi/jcloudevents.git</connection>
         <developerConnection>scm:git:git@github.com:project-streamzi/jcloudevents.git</developerConnection>
         <url>https://github.com/project-streamzi/jcloudevents</url>
-        <tag>HEAD</tag>
+        <tag>jcloudevents-parent-0.0.2</tag>
     </scm>
 
     <licenses>
