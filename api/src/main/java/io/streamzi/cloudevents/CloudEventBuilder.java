@@ -14,7 +14,7 @@ public class CloudEventBuilder<T> {
     private URI source;
     private String eventID;
     private String eventTypeVersion;
-    private ZonedDateTime eventTime = ZonedDateTime.now();
+    private ZonedDateTime eventTime;
     private URI schemaURL;
     private String contentType;
     private Map extensions;
