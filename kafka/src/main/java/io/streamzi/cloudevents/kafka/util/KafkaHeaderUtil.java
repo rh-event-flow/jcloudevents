@@ -11,6 +11,8 @@ import org.apache.kafka.common.serialization.Serde;
 
 import java.net.URI;
 import java.time.ZonedDateTime;
+import java.util.HashMap;
+import java.util.Map;
 
 import static io.streamzi.cloudevents.impl.CloudEventImpl.CLOUD_EVENTS_VERSION_KEY;
 import static io.streamzi.cloudevents.impl.CloudEventImpl.CONTENT_TYPE_KEY;
@@ -75,7 +77,7 @@ public final class KafkaHeaderUtil {
      * @param <V> Message Value
      * @return CloudEvent representation of the Kafka message
      */
-    public static <K, V> CloudEvent<ConsumerRecord<K, V>> createFromConsumerRecord(final ConsumerRecord<K, V> record) {
+    public static <K, V> CloudEvent<Map<K, V>> createFromConsumerRecord(final ConsumerRecord<K, V> record) {
 
         final Headers headers = record.headers();
         final CloudEventBuilder builder = new CloudEventBuilder();
@@ -98,17 +100,20 @@ public final class KafkaHeaderUtil {
             if (headers.lastHeader(SCHEMA_URL_KEY) != null) {
                 builder.schemaURL(URI.create(CafdiSerdes.serdeFrom(String.class).deserializer().deserialize(null, headers.lastHeader(SCHEMA_URL_KEY).value())));
             }
-            if (headers.lastHeader(CONTENT_TYPE_KEY) != null) {
-                builder.contentType(CafdiSerdes.serdeFrom(String.class).deserializer().deserialize(null, headers.lastHeader(CONTENT_TYPE_KEY).value()));
-            } else {
-                // application/ce-kafka-consumer-record
-                builder.contentType("application/ce-kafka-consumer-record");
-            }
 
             //todo: add extensions
 
+            // use the pure key/value as the 'data' part
+            final Map<K, V> rawKafkaRecord = new HashMap();
+            rawKafkaRecord.put(record.key(), record.value());
+            builder.data(rawKafkaRecord);
 
-            builder.data(record);
+            if (headers.lastHeader(CONTENT_TYPE_KEY) != null) {
+                builder.contentType(CafdiSerdes.serdeFrom(String.class).deserializer().deserialize(null, headers.lastHeader(CONTENT_TYPE_KEY).value()));
+            } else {
+                // if nothing was specified we use a 'custom' content type to describe the data format
+                builder.contentType("application/ce-kafka-data"); // todo: move to constant
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
