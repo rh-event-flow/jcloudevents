@@ -1,7 +1,7 @@
 package io.streamzi.cloudevents.kafka.util;
 
-import io.streamzi.cloudevents.CloudEvent;
-import io.streamzi.cloudevents.CloudEventBuilder;
+import io.cloudevents.CloudEvent;
+import io.cloudevents.CloudEventBuilder;
 import org.aerogear.kafka.serialization.CafdiSerdes;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.common.header.Headers;
@@ -14,14 +14,6 @@ import java.time.ZonedDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
-import static io.streamzi.cloudevents.impl.CloudEventImpl.CLOUD_EVENTS_VERSION_KEY;
-import static io.streamzi.cloudevents.impl.CloudEventImpl.CONTENT_TYPE_KEY;
-import static io.streamzi.cloudevents.impl.CloudEventImpl.EVENT_ID_KEY;
-import static io.streamzi.cloudevents.impl.CloudEventImpl.EVENT_TIME_KEY;
-import static io.streamzi.cloudevents.impl.CloudEventImpl.EVENT_TYPE_KEY;
-import static io.streamzi.cloudevents.impl.CloudEventImpl.EVENT_TYPE_VERSION_KEY;
-import static io.streamzi.cloudevents.impl.CloudEventImpl.SCHEMA_URL_KEY;
-import static io.streamzi.cloudevents.impl.CloudEventImpl.SOURCE_KEY;
 import static java.time.format.DateTimeFormatter.ISO_ZONED_DATE_TIME;
 
 /**
@@ -29,6 +21,16 @@ import static java.time.format.DateTimeFormatter.ISO_ZONED_DATE_TIME;
  *
  */
 public final class KafkaHeaderUtil {
+    public static final String EVENT_TYPE_KEY = "eventType";
+    public static final String CLOUD_EVENTS_VERSION_KEY = "cloudEventsVersion";
+    public static final String SOURCE_KEY = "source";
+    public static final String EVENT_ID_KEY = "eventID";
+    public static final String EVENT_TYPE_VERSION_KEY = "eventTypeVersion";
+    public static final String EVENT_TIME_KEY = "eventTime";
+    public static final String SCHEMA_URL_KEY = "schemaURL";
+    public static final String CONTENT_TYPE_KEY = "contentType";
+    public static final String EXTENSIONS_KEY = "extensions";
+    public static final String DATA_KEY = "data";
 
     private KafkaHeaderUtil() {
         // no-op
@@ -85,7 +87,6 @@ public final class KafkaHeaderUtil {
         try {
 
             builder.eventType(CafdiSerdes.serdeFrom(String.class).deserializer().deserialize(null, headers.lastHeader(EVENT_TYPE_KEY).value()));
-            builder.cloudEventsVersion(CafdiSerdes.serdeFrom(String.class).deserializer().deserialize(null, headers.lastHeader(CLOUD_EVENTS_VERSION_KEY).value()));
             builder.source(URI.create(CafdiSerdes.serdeFrom(String.class).deserializer().deserialize(null, headers.lastHeader(SOURCE_KEY).value())));
             builder.eventID(CafdiSerdes.serdeFrom(String.class).deserializer().deserialize(null, headers.lastHeader(EVENT_ID_KEY).value()));
 

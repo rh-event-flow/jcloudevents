@@ -1,5 +1,7 @@
 package io.streamzi.cloudevents;
 
+import io.cloudevents.CloudEvent;
+import io.streamzi.cloudevents.kafka.util.JsonMapper;
 import io.streamzi.cloudevents.kafka.util.KafkaHeaderUtil;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.common.header.Headers;
@@ -12,11 +14,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import static io.streamzi.cloudevents.impl.CloudEventImpl.CLOUD_EVENTS_VERSION_KEY;
-import static io.streamzi.cloudevents.impl.CloudEventImpl.EVENT_ID_KEY;
-import static io.streamzi.cloudevents.impl.CloudEventImpl.EVENT_TIME_KEY;
-import static io.streamzi.cloudevents.impl.CloudEventImpl.EVENT_TYPE_KEY;
-import static io.streamzi.cloudevents.impl.CloudEventImpl.SOURCE_KEY;
+import static io.streamzi.cloudevents.kafka.util.KafkaHeaderUtil.CLOUD_EVENTS_VERSION_KEY;
+import static io.streamzi.cloudevents.kafka.util.KafkaHeaderUtil.EVENT_ID_KEY;
+import static io.streamzi.cloudevents.kafka.util.KafkaHeaderUtil.EVENT_TIME_KEY;
+import static io.streamzi.cloudevents.kafka.util.KafkaHeaderUtil.EVENT_TYPE_KEY;
+import static io.streamzi.cloudevents.kafka.util.KafkaHeaderUtil.SOURCE_KEY;
 import static java.time.format.DateTimeFormatter.ISO_ZONED_DATE_TIME;
 import static org.apache.kafka.common.record.TimestampType.CREATE_TIME;
 import static org.assertj.core.api.Assertions.assertThat;
