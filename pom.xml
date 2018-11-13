@@ -56,7 +56,7 @@
             <dependency>
                 <groupId>io.cloudevents</groupId>
                 <artifactId>cloudevents-api</artifactId>
-                <version>0.0.2-SNAPSHOT</version>
+                <version>0.0.2</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
