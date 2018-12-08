@@ -1,6 +1,6 @@
 package io.streamzi.cloudevents.beans;
 
-import io.streamzi.cloudevents.CloudEvent;
+import io.cloudevents.CloudEvent;
 import io.streamzi.cloudevents.cdi.EventType;
 
 import javax.enterprise.event.Observes;

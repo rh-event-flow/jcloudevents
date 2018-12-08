@@ -1,8 +1,8 @@
 package io.streamzi.cloudevents.jaxrs;
 
-import io.streamzi.cloudevents.CloudEvent;
+import io.cloudevents.CloudEvent;
+import io.cloudevents.impl.DefaultCloudEventImpl;
 import io.streamzi.cloudevents.cdi.EventTypeQualifier;
-import io.streamzi.cloudevents.impl.CloudEventImpl;
 
 
 import javax.enterprise.event.Event;
@@ -23,7 +23,7 @@ public class CloudEventEndpoint {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response hello(final CloudEventImpl ce) {
+    public Response hello(final DefaultCloudEventImpl ce) {
 
         // dispatch to CDI
         cloudEventSource.select(new EventTypeQualifier(ce.getEventType())).fire(ce);

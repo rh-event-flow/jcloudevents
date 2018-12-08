@@ -1,7 +1,6 @@
 package io.streamzi.cloudevents.beans;
-
-import io.streamzi.cloudevents.CloudEvent;
-import io.streamzi.cloudevents.CloudEventBuilder;
+import io.cloudevents.CloudEvent;
+import io.cloudevents.CloudEventBuilder;
 import io.streamzi.cloudevents.cdi.EventTypeQualifier;
 
 import javax.enterprise.event.Event;
