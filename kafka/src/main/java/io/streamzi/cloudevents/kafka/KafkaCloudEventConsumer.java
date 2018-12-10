@@ -1,7 +1,7 @@
 package io.streamzi.cloudevents.kafka;
 
 import io.cloudevents.CloudEvent;
-import io.streamzi.cloudevents.cdi.EventTypeQualifier;
+import io.cloudevents.cdi.EventTypeQualifier;
 import org.aerogear.kafka.cdi.annotation.Consumer;
 import org.aerogear.kafka.cdi.annotation.KafkaConfig;
 
