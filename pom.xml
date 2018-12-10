@@ -58,6 +58,12 @@
                 <artifactId>cloudevents-api</artifactId>
                 <version>${cloudevents.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>io.cloudevents</groupId>
+                <artifactId>cdi</artifactId>
+                <version>${cloudevents.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
