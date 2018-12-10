@@ -7,8 +7,6 @@ import org.aerogear.kafka.cdi.annotation.KafkaConfig;
 
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
-import java.util.Map;
-import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,13 +22,9 @@ public class KafkaCloudEventConsumer {
     @Consumer(topics = "#{CLOUD_EVENT_BRIDGE_TOPIC}", groupId = "jCloudEvent_group")
     public void eventBridge(final CloudEvent<?> ce) {
 
-        final String eventType = ce.getEventType();
+        final String eventType = ce.getType();
         logger.info("Processing CloudEvent type: " + eventType);
 
-
-        // add some processor metadata
-        final Optional<Map> extensionMap = ce.getExtensions();
-        extensionMap.get().put("processor", "kafka-cdi");
 
         // dispatch to CDI
         try {

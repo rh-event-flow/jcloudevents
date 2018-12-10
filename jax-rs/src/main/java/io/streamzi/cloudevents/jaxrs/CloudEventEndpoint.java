@@ -1,8 +1,8 @@
 package io.streamzi.cloudevents.jaxrs;
 
 import io.cloudevents.CloudEvent;
+import io.cloudevents.cdi.EventTypeQualifier;
 import io.cloudevents.impl.DefaultCloudEventImpl;
-import io.streamzi.cloudevents.cdi.EventTypeQualifier;
 
 
 import javax.enterprise.event.Event;
@@ -26,7 +26,7 @@ public class CloudEventEndpoint {
     public Response hello(final DefaultCloudEventImpl ce) {
 
         // dispatch to CDI
-        cloudEventSource.select(new EventTypeQualifier(ce.getEventType())).fire(ce);
+        cloudEventSource.select(new EventTypeQualifier(ce.getType())).fire(ce);
 
         return Response.status(Response.Status.ACCEPTED).entity(ce).build();
     }

@@ -66,9 +66,9 @@
             <version>${jackson.version}</version>
         </dependency>
         <dependency>
-            <groupId>io.streamzi</groupId>
-            <artifactId>jcloudevents-cdi</artifactId>
-            <version>${project.version}</version>
+            <groupId>io.cloudevents</groupId>
+            <artifactId>cdi</artifactId>
+            <version>${cloudevents.version}</version>
         </dependency>
 
         <dependency>
@@ -95,7 +95,7 @@
     </dependencies>
 
     <properties>
-        <jackson.version>2.9.5</jackson.version>
+        <jackson.version>2.9.6</jackson.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
