@@ -62,10 +62,10 @@ public class KafkaHeaderTest {
         assertThat(cloudEvent.getData().get()).isEqualTo(data);
         assertThat(cloudEvent.getContentType().get()).isEqualTo("application/ce-kafka-data");
 
-        assertThat(cloudEvent.getEventType()).isEqualTo("MY.CLOUD.CREATE");
-        assertThat(cloudEvent.getCloudEventsVersion()).isEqualTo("0.1");
+        assertThat(cloudEvent.getType()).isEqualTo("MY.CLOUD.CREATE");
+        assertThat(cloudEvent.getSpecVersion()).isEqualTo("0.2");
         assertThat(cloudEvent.getSource()).isEqualTo(URI.create("/senderTopic"));
-        assertThat(cloudEvent.getEventID()).isNotNull();
+        assertThat(cloudEvent.getId()).isNotNull();
 
     }
 }
